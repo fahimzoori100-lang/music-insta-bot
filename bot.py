@@ -4,21 +4,19 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 TOKEN = "8907532686:AAFWf18vL2pPlc2Q0vS4Z2nfffIAZdD54fY"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = """
-🔥 خوش آمدی به ربات 🔥
-
-📥 لینک اینستاگرام بفرست تا دانلود کنم
-🎵 یا اسم آهنگ بفرست تا موزیک پیدا کنم
-"""
-    await update.message.reply_text(text)
+    await update.message.reply_text(
+        "🔥 خوش آمدی!\n\n📥 لینک اینستاگرام بفرست\n🎵 یا اسم آهنگ بفرست"
+    )
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    msg = update.message.text
+    text = update.message.text
 
-    if "instagram.com" in msg:
-        await update.message.reply_text("📥 لینک اینستا دریافت شد — دانلود بزودی اضافه میشه 🔥")
+    if "instagram.com" in text:
+        await update.message.reply_text("📥 لینک اینستا دریافت شد — دانلود مرحله بعد وصل میشه")
     else:
-        await update.message.reply_text(f"🎵 در حال جستجوی موزیک: {msg}")
+        await update.message.reply_text(
+            f"🎵 آهنگ «{text}» پیدا نشد یا موزیک‌یاب هنوز وصل نشده"
+        )
 
 app = ApplicationBuilder().token(TOKEN).build()
 
