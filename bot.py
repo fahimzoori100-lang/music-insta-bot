@@ -1,26 +1,29 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
-TOKEN ="8907532686:AAFXet1xTijW4ssNxOkQ02oL10XnN_Z2K60"
+TOKEN = "8907532686:AAFWf18vL2pPlc2Q0vS4Z2nfffIAZdD54fY"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "🎵 خوش آمدی!\n\n"
-        "لینک اینستاگرام یا اسم آهنگ را بفرست."
-    )
+    text = """
+🔥 خوش آمدی به ربات 🔥
+
+📥 لینک اینستاگرام بفرست تا دانلود کنم
+🎵 یا اسم آهنگ بفرست تا موزیک پیدا کنم
+"""
+    await update.message.reply_text(text)
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text
+    msg = update.message.text
 
-    if "instagram.com" in text:
-        await update.message.reply_text("📥 لینک اینستا دریافت شد")
+    if "instagram.com" in msg:
+        await update.message.reply_text("📥 لینک اینستا دریافت شد — دانلود بزودی اضافه میشه 🔥")
     else:
-        await update.message.reply_text(f"🎵 در حال جستجوی موزیک: {text}")
+        await update.message.reply_text(f"🎵 در حال جستجوی موزیک: {msg}")
 
 app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-print("Bot is running...")
+print("Bot running...")
 app.run_polling()
