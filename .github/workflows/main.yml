@@ -18,7 +18,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install python-telegram-bot
+        pip install python-telegram-bot requests
 
     - name: Run bot
       run: python bot.py
